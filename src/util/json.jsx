@@ -1,0 +1,1 @@
+export const copy = (obj, key) => JSON.parse(JSON.stringify(key ? obj[key] : obj));

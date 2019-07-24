@@ -1,0 +1,729 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
+}
+
+"An object with an ID"
+interface Node {
+  "The id of the object."
+  id: ID!
+}
+
+type AggregateResult {
+  count: Int!
+}
+
+type AggregateScore {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type BatchPayload {
+  "The number of nodes that have been affected by the Batch operation."
+  count: Long!
+}
+
+type Mutation {
+  createResult(data: ResultCreateInput!): Result!
+  createScore(data: ScoreCreateInput!): Score!
+  createUser(data: UserCreateInput!): User!
+  deleteManyResults(where: ResultWhereInput): BatchPayload!
+  deleteManyScores(where: ScoreWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteResult(where: ResultWhereUniqueInput!): Result
+  deleteScore(where: ScoreWhereUniqueInput!): Score
+  deleteUser(where: UserWhereUniqueInput!): User
+  updateManyResults(data: ResultUpdateManyMutationInput!, where: ResultWhereInput): BatchPayload!
+  updateManyScores(data: ScoreUpdateManyMutationInput!, where: ScoreWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  updateResult(data: ResultUpdateInput!, where: ResultWhereUniqueInput!): Result
+  updateScore(data: ScoreUpdateInput!, where: ScoreWhereUniqueInput!): Score
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  upsertResult(create: ResultCreateInput!, update: ResultUpdateInput!, where: ResultWhereUniqueInput!): Result!
+  upsertScore(create: ScoreCreateInput!, update: ScoreUpdateInput!, where: ScoreWhereUniqueInput!): Score!
+  upsertUser(create: UserCreateInput!, update: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+"Information about pagination in a connection."
+type PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+
+type Query {
+  "Fetches an object given its ID"
+  node(
+    #The ID of an object
+    id: ID!
+  ): Node
+  result(where: ResultWhereUniqueInput!): Result
+  results(after: String, before: String, first: Int, last: Int, orderBy: ResultOrderByInput, skip: Int, where: ResultWhereInput): [Result]!
+  resultsConnection(after: String, before: String, first: Int, last: Int, orderBy: ResultOrderByInput, skip: Int, where: ResultWhereInput): ResultConnection!
+  score(where: ScoreWhereUniqueInput!): Score
+  scores(after: String, before: String, first: Int, last: Int, orderBy: ScoreOrderByInput, skip: Int, where: ScoreWhereInput): [Score]!
+  scoresConnection(after: String, before: String, first: Int, last: Int, orderBy: ScoreOrderByInput, skip: Int, where: ScoreWhereInput): ScoreConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User]!
+  usersConnection(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): UserConnection!
+}
+
+type Result implements Node {
+  id: ID!
+  isDeuce: Boolean!
+  scores(after: String, before: String, first: Int, last: Int, orderBy: ScoreOrderByInput, skip: Int, where: ScoreWhereInput): [Score!]
+  sets: Int!
+  winner: String!
+}
+
+"A connection to a list of items."
+type ResultConnection {
+  aggregate: AggregateResult!
+  "A list of edges."
+  edges: [ResultEdge]!
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+}
+
+"An edge in a connection."
+type ResultEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Result!
+}
+
+type ResultPreviousValues {
+  id: ID!
+  isDeuce: Boolean!
+  sets: Int!
+  winner: String!
+}
+
+type ResultSubscriptionPayload {
+  mutation: MutationType!
+  node: Result
+  previousValues: ResultPreviousValues
+  updatedFields: [String!]
+}
+
+type Score implements Node {
+  id: ID!
+  name: String!
+  wins: Int!
+}
+
+"A connection to a list of items."
+type ScoreConnection {
+  aggregate: AggregateScore!
+  "A list of edges."
+  edges: [ScoreEdge]!
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+}
+
+"An edge in a connection."
+type ScoreEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: Score!
+}
+
+type ScorePreviousValues {
+  id: ID!
+  name: String!
+  wins: Int!
+}
+
+type ScoreSubscriptionPayload {
+  mutation: MutationType!
+  node: Score
+  previousValues: ScorePreviousValues
+  updatedFields: [String!]
+}
+
+type Subscription {
+  result(where: ResultSubscriptionWhereInput): ResultSubscriptionPayload
+  score(where: ScoreSubscriptionWhereInput): ScoreSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User implements Node {
+  email: String!
+  id: ID!
+  password: String!
+}
+
+"A connection to a list of items."
+type UserConnection {
+  aggregate: AggregateUser!
+  "A list of edges."
+  edges: [UserEdge]!
+  "Information to aid in pagination."
+  pageInfo: PageInfo!
+}
+
+"An edge in a connection."
+type UserEdge {
+  "A cursor for use in pagination."
+  cursor: String!
+  "The item at the end of the edge."
+  node: User!
+}
+
+type UserPreviousValues {
+  email: String!
+  id: ID!
+  password: String!
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  previousValues: UserPreviousValues
+  updatedFields: [String!]
+}
+
+enum MutationType {
+  CREATED
+  DELETED
+  UPDATED
+}
+
+enum ResultOrderByInput {
+  id_ASC
+  id_DESC
+  isDeuce_ASC
+  isDeuce_DESC
+  sets_ASC
+  sets_DESC
+  winner_ASC
+  winner_DESC
+}
+
+enum ScoreOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  wins_ASC
+  wins_DESC
+}
+
+enum UserOrderByInput {
+  email_ASC
+  email_DESC
+  id_ASC
+  id_DESC
+  password_ASC
+  password_DESC
+}
+
+input ResultCreateInput {
+  id: ID
+  isDeuce: Boolean!
+  scores: ScoreCreateManyInput
+  sets: Int!
+  winner: String!
+}
+
+input ResultSubscriptionWhereInput {
+  "Logical AND on all given filters."
+  AND: [ResultSubscriptionWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [ResultSubscriptionWhereInput!]
+  "Logical OR on all given filters."
+  OR: [ResultSubscriptionWhereInput!]
+  "The subscription event gets dispatched when it's listed in mutation_in"
+  mutation_in: [MutationType!]
+  node: ResultWhereInput
+  "The subscription event gets only dispatched when one of the updated fields names is included in this list"
+  updatedFields_contains: String
+  "The subscription event gets only dispatched when all of the field names included in this list have been updated"
+  updatedFields_contains_every: [String!]
+  "The subscription event gets only dispatched when some of the field names included in this list have been updated"
+  updatedFields_contains_some: [String!]
+}
+
+input ResultUpdateInput {
+  isDeuce: Boolean
+  scores: ScoreUpdateManyInput
+  sets: Int
+  winner: String
+}
+
+input ResultUpdateManyMutationInput {
+  isDeuce: Boolean
+  sets: Int
+  winner: String
+}
+
+input ResultWhereInput {
+  "Logical AND on all given filters."
+  AND: [ResultWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [ResultWhereInput!]
+  "Logical OR on all given filters."
+  OR: [ResultWhereInput!]
+  id: ID
+  "All values containing the given string."
+  id_contains: ID
+  "All values ending with the given string."
+  id_ends_with: ID
+  "All values greater than the given value."
+  id_gt: ID
+  "All values greater than or equal the given value."
+  id_gte: ID
+  "All values that are contained in given list."
+  id_in: [ID!]
+  "All values less than the given value."
+  id_lt: ID
+  "All values less than or equal the given value."
+  id_lte: ID
+  "All values that are not equal to given value."
+  id_not: ID
+  "All values not containing the given string."
+  id_not_contains: ID
+  "All values not ending with the given string."
+  id_not_ends_with: ID
+  "All values that are not contained in given list."
+  id_not_in: [ID!]
+  "All values not starting with the given string."
+  id_not_starts_with: ID
+  "All values starting with the given string."
+  id_starts_with: ID
+  isDeuce: Boolean
+  "All values that are not equal to given value."
+  isDeuce_not: Boolean
+  scores_every: ScoreWhereInput
+  scores_none: ScoreWhereInput
+  scores_some: ScoreWhereInput
+  sets: Int
+  "All values greater than the given value."
+  sets_gt: Int
+  "All values greater than or equal the given value."
+  sets_gte: Int
+  "All values that are contained in given list."
+  sets_in: [Int!]
+  "All values less than the given value."
+  sets_lt: Int
+  "All values less than or equal the given value."
+  sets_lte: Int
+  "All values that are not equal to given value."
+  sets_not: Int
+  "All values that are not contained in given list."
+  sets_not_in: [Int!]
+  winner: String
+  "All values containing the given string."
+  winner_contains: String
+  "All values ending with the given string."
+  winner_ends_with: String
+  "All values greater than the given value."
+  winner_gt: String
+  "All values greater than or equal the given value."
+  winner_gte: String
+  "All values that are contained in given list."
+  winner_in: [String!]
+  "All values less than the given value."
+  winner_lt: String
+  "All values less than or equal the given value."
+  winner_lte: String
+  "All values that are not equal to given value."
+  winner_not: String
+  "All values not containing the given string."
+  winner_not_contains: String
+  "All values not ending with the given string."
+  winner_not_ends_with: String
+  "All values that are not contained in given list."
+  winner_not_in: [String!]
+  "All values not starting with the given string."
+  winner_not_starts_with: String
+  "All values starting with the given string."
+  winner_starts_with: String
+}
+
+input ResultWhereUniqueInput {
+  id: ID
+}
+
+input ScoreCreateInput {
+  id: ID
+  name: String!
+  wins: Int!
+}
+
+input ScoreCreateManyInput {
+  connect: [ScoreWhereUniqueInput!]
+  create: [ScoreCreateInput!]
+}
+
+input ScoreScalarWhereInput {
+  "Logical AND on all given filters."
+  AND: [ScoreScalarWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [ScoreScalarWhereInput!]
+  "Logical OR on all given filters."
+  OR: [ScoreScalarWhereInput!]
+  id: ID
+  "All values containing the given string."
+  id_contains: ID
+  "All values ending with the given string."
+  id_ends_with: ID
+  "All values greater than the given value."
+  id_gt: ID
+  "All values greater than or equal the given value."
+  id_gte: ID
+  "All values that are contained in given list."
+  id_in: [ID!]
+  "All values less than the given value."
+  id_lt: ID
+  "All values less than or equal the given value."
+  id_lte: ID
+  "All values that are not equal to given value."
+  id_not: ID
+  "All values not containing the given string."
+  id_not_contains: ID
+  "All values not ending with the given string."
+  id_not_ends_with: ID
+  "All values that are not contained in given list."
+  id_not_in: [ID!]
+  "All values not starting with the given string."
+  id_not_starts_with: ID
+  "All values starting with the given string."
+  id_starts_with: ID
+  name: String
+  "All values containing the given string."
+  name_contains: String
+  "All values ending with the given string."
+  name_ends_with: String
+  "All values greater than the given value."
+  name_gt: String
+  "All values greater than or equal the given value."
+  name_gte: String
+  "All values that are contained in given list."
+  name_in: [String!]
+  "All values less than the given value."
+  name_lt: String
+  "All values less than or equal the given value."
+  name_lte: String
+  "All values that are not equal to given value."
+  name_not: String
+  "All values not containing the given string."
+  name_not_contains: String
+  "All values not ending with the given string."
+  name_not_ends_with: String
+  "All values that are not contained in given list."
+  name_not_in: [String!]
+  "All values not starting with the given string."
+  name_not_starts_with: String
+  "All values starting with the given string."
+  name_starts_with: String
+  wins: Int
+  "All values greater than the given value."
+  wins_gt: Int
+  "All values greater than or equal the given value."
+  wins_gte: Int
+  "All values that are contained in given list."
+  wins_in: [Int!]
+  "All values less than the given value."
+  wins_lt: Int
+  "All values less than or equal the given value."
+  wins_lte: Int
+  "All values that are not equal to given value."
+  wins_not: Int
+  "All values that are not contained in given list."
+  wins_not_in: [Int!]
+}
+
+input ScoreSubscriptionWhereInput {
+  "Logical AND on all given filters."
+  AND: [ScoreSubscriptionWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [ScoreSubscriptionWhereInput!]
+  "Logical OR on all given filters."
+  OR: [ScoreSubscriptionWhereInput!]
+  "The subscription event gets dispatched when it's listed in mutation_in"
+  mutation_in: [MutationType!]
+  node: ScoreWhereInput
+  "The subscription event gets only dispatched when one of the updated fields names is included in this list"
+  updatedFields_contains: String
+  "The subscription event gets only dispatched when all of the field names included in this list have been updated"
+  updatedFields_contains_every: [String!]
+  "The subscription event gets only dispatched when some of the field names included in this list have been updated"
+  updatedFields_contains_some: [String!]
+}
+
+input ScoreUpdateDataInput {
+  name: String
+  wins: Int
+}
+
+input ScoreUpdateInput {
+  name: String
+  wins: Int
+}
+
+input ScoreUpdateManyDataInput {
+  name: String
+  wins: Int
+}
+
+input ScoreUpdateManyInput {
+  connect: [ScoreWhereUniqueInput!]
+  create: [ScoreCreateInput!]
+  delete: [ScoreWhereUniqueInput!]
+  deleteMany: [ScoreScalarWhereInput!]
+  disconnect: [ScoreWhereUniqueInput!]
+  set: [ScoreWhereUniqueInput!]
+  update: [ScoreUpdateWithWhereUniqueNestedInput!]
+  updateMany: [ScoreUpdateManyWithWhereNestedInput!]
+  upsert: [ScoreUpsertWithWhereUniqueNestedInput!]
+}
+
+input ScoreUpdateManyMutationInput {
+  name: String
+  wins: Int
+}
+
+input ScoreUpdateManyWithWhereNestedInput {
+  data: ScoreUpdateManyDataInput!
+  where: ScoreScalarWhereInput!
+}
+
+input ScoreUpdateWithWhereUniqueNestedInput {
+  data: ScoreUpdateDataInput!
+  where: ScoreWhereUniqueInput!
+}
+
+input ScoreUpsertWithWhereUniqueNestedInput {
+  create: ScoreCreateInput!
+  update: ScoreUpdateDataInput!
+  where: ScoreWhereUniqueInput!
+}
+
+input ScoreWhereInput {
+  "Logical AND on all given filters."
+  AND: [ScoreWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [ScoreWhereInput!]
+  "Logical OR on all given filters."
+  OR: [ScoreWhereInput!]
+  id: ID
+  "All values containing the given string."
+  id_contains: ID
+  "All values ending with the given string."
+  id_ends_with: ID
+  "All values greater than the given value."
+  id_gt: ID
+  "All values greater than or equal the given value."
+  id_gte: ID
+  "All values that are contained in given list."
+  id_in: [ID!]
+  "All values less than the given value."
+  id_lt: ID
+  "All values less than or equal the given value."
+  id_lte: ID
+  "All values that are not equal to given value."
+  id_not: ID
+  "All values not containing the given string."
+  id_not_contains: ID
+  "All values not ending with the given string."
+  id_not_ends_with: ID
+  "All values that are not contained in given list."
+  id_not_in: [ID!]
+  "All values not starting with the given string."
+  id_not_starts_with: ID
+  "All values starting with the given string."
+  id_starts_with: ID
+  name: String
+  "All values containing the given string."
+  name_contains: String
+  "All values ending with the given string."
+  name_ends_with: String
+  "All values greater than the given value."
+  name_gt: String
+  "All values greater than or equal the given value."
+  name_gte: String
+  "All values that are contained in given list."
+  name_in: [String!]
+  "All values less than the given value."
+  name_lt: String
+  "All values less than or equal the given value."
+  name_lte: String
+  "All values that are not equal to given value."
+  name_not: String
+  "All values not containing the given string."
+  name_not_contains: String
+  "All values not ending with the given string."
+  name_not_ends_with: String
+  "All values that are not contained in given list."
+  name_not_in: [String!]
+  "All values not starting with the given string."
+  name_not_starts_with: String
+  "All values starting with the given string."
+  name_starts_with: String
+  wins: Int
+  "All values greater than the given value."
+  wins_gt: Int
+  "All values greater than or equal the given value."
+  wins_gte: Int
+  "All values that are contained in given list."
+  wins_in: [Int!]
+  "All values less than the given value."
+  wins_lt: Int
+  "All values less than or equal the given value."
+  wins_lte: Int
+  "All values that are not equal to given value."
+  wins_not: Int
+  "All values that are not contained in given list."
+  wins_not_in: [Int!]
+}
+
+input ScoreWhereUniqueInput {
+  id: ID
+}
+
+input UserCreateInput {
+  email: String!
+  id: ID
+  password: String!
+}
+
+input UserSubscriptionWhereInput {
+  "Logical AND on all given filters."
+  AND: [UserSubscriptionWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [UserSubscriptionWhereInput!]
+  "Logical OR on all given filters."
+  OR: [UserSubscriptionWhereInput!]
+  "The subscription event gets dispatched when it's listed in mutation_in"
+  mutation_in: [MutationType!]
+  node: UserWhereInput
+  "The subscription event gets only dispatched when one of the updated fields names is included in this list"
+  updatedFields_contains: String
+  "The subscription event gets only dispatched when all of the field names included in this list have been updated"
+  updatedFields_contains_every: [String!]
+  "The subscription event gets only dispatched when some of the field names included in this list have been updated"
+  updatedFields_contains_some: [String!]
+}
+
+input UserUpdateInput {
+  email: String
+  password: String
+}
+
+input UserUpdateManyMutationInput {
+  email: String
+  password: String
+}
+
+input UserWhereInput {
+  "Logical AND on all given filters."
+  AND: [UserWhereInput!]
+  "Logical NOT on all given filters combined by AND."
+  NOT: [UserWhereInput!]
+  "Logical OR on all given filters."
+  OR: [UserWhereInput!]
+  email: String
+  "All values containing the given string."
+  email_contains: String
+  "All values ending with the given string."
+  email_ends_with: String
+  "All values greater than the given value."
+  email_gt: String
+  "All values greater than or equal the given value."
+  email_gte: String
+  "All values that are contained in given list."
+  email_in: [String!]
+  "All values less than the given value."
+  email_lt: String
+  "All values less than or equal the given value."
+  email_lte: String
+  "All values that are not equal to given value."
+  email_not: String
+  "All values not containing the given string."
+  email_not_contains: String
+  "All values not ending with the given string."
+  email_not_ends_with: String
+  "All values that are not contained in given list."
+  email_not_in: [String!]
+  "All values not starting with the given string."
+  email_not_starts_with: String
+  "All values starting with the given string."
+  email_starts_with: String
+  id: ID
+  "All values containing the given string."
+  id_contains: ID
+  "All values ending with the given string."
+  id_ends_with: ID
+  "All values greater than the given value."
+  id_gt: ID
+  "All values greater than or equal the given value."
+  id_gte: ID
+  "All values that are contained in given list."
+  id_in: [ID!]
+  "All values less than the given value."
+  id_lt: ID
+  "All values less than or equal the given value."
+  id_lte: ID
+  "All values that are not equal to given value."
+  id_not: ID
+  "All values not containing the given string."
+  id_not_contains: ID
+  "All values not ending with the given string."
+  id_not_ends_with: ID
+  "All values that are not contained in given list."
+  id_not_in: [ID!]
+  "All values not starting with the given string."
+  id_not_starts_with: ID
+  "All values starting with the given string."
+  id_starts_with: ID
+  password: String
+  "All values containing the given string."
+  password_contains: String
+  "All values ending with the given string."
+  password_ends_with: String
+  "All values greater than the given value."
+  password_gt: String
+  "All values greater than or equal the given value."
+  password_gte: String
+  "All values that are contained in given list."
+  password_in: [String!]
+  "All values less than the given value."
+  password_lt: String
+  "All values less than or equal the given value."
+  password_lte: String
+  "All values that are not equal to given value."
+  password_not: String
+  "All values not containing the given string."
+  password_not_contains: String
+  "All values not ending with the given string."
+  password_not_ends_with: String
+  "All values that are not contained in given list."
+  password_not_in: [String!]
+  "All values not starting with the given string."
+  password_not_starts_with: String
+  "All values starting with the given string."
+  password_starts_with: String
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: ID
+}
+
+
+"The `Long` scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1."
+scalar Long

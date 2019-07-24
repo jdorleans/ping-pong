@@ -1,0 +1,22 @@
+{
+  "schemaPath": "schema.graphql",
+  "extensions": {
+    "endpoints": {
+      "Default Introspection Endpoint": {
+        "url": "https://us1.prisma.sh/jonathan-dorleans-246be5/ping-pong/dev",
+        "introspect": true,
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "origin": "http://localhost:8080",
+          "content-type": "application/json"
+        }
+      },
+      "Default (http://localhost:4466)": {
+        "url": "https://us1.prisma.sh/jonathan-dorleans-246be5/ping-pong/dev",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        }
+      }
+    }
+  }
+}

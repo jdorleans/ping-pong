@@ -1,0 +1,20 @@
+{
+  "email.name": "Email",
+  "password.name": "Mot de passe",
+  "auth.invalid": "Email ou mot de passe invalide. Réessayer.",
+  "login.new": "Vous n'avez pas de compte? ",
+  "login.name": "S'identifier",
+  "signup.name": "S'inscrire",
+  "signup.exist": "Vous avez déjà un compte? ",
+  "logout.name": "Déconnectez",
+  "game.new": "Nouveau jeu",
+  "game.p1": "Joueur 1",
+  "game.p2": "Joueur 2",
+  "game.start": "Début",
+  "game.set": "Série",
+  "game.deuce": "(deuce)",
+  "game.winner": "Gagnant",
+  "score.name": "But",
+  "score.games": "Jeux",
+  "score.miss": "Manquer"
+}

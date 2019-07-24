@@ -1,0 +1,20 @@
+{
+  "email.name": "Email",
+  "password.name": "Password",
+  "auth.invalid": "Invalid email or password. Try again.",
+  "login.new": "Don't have an account? ",
+  "login.name": "Login",
+  "signup.name": "Sign Up",
+  "signup.exist": "Already have an account? ",
+  "logout.name": "Logout",
+  "game.new": "New Game",
+  "game.p1": "Player 1",
+  "game.p2": "Player 2",
+  "game.start": "Start",
+  "game.set": "Set",
+  "game.deuce": "(deuce)",
+  "game.winner": "Winner",
+  "score.name": "Score",
+  "score.games": "Games",
+  "score.miss": "Miss"
+}

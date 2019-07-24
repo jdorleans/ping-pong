@@ -1,0 +1,19 @@
+type User {
+  id: ID! @id
+  email: String! @unique
+  password: String!
+}
+
+type Result {
+  id: ID! @id
+  sets: Int!
+  isDeuce: Boolean!
+  scores: [Score!]! @relation
+  winner: String!
+}
+
+type Score {
+  id: ID! @id
+  name: String!
+  wins: Int!
+}
